@@ -1,0 +1,131 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: var(--font-body), sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 98%; /* Very light gray / almost white for main background */
+    --foreground: 220 15% 25%; /* Dark cool gray for text */
+
+    --card: 0 0% 100%; /* White for cards */
+    --card-foreground: 220 15% 20%; /* Darker text for cards */
+
+    --popover: 0 0% 100%; /* White for popovers */
+    --popover-foreground: 220 15% 20%;
+
+    --primary: 7 100% 50%; /* Brightly Orange #ff1e00 */
+    --primary-foreground: 0 0% 100%; /* White text on orange */
+
+    --secondary: 7 90% 65%; /* Lighter Orange */
+    --secondary-foreground: 7 100% 15%; /* Dark text for lighter orange */
+
+    --muted: 220 20% 90%; /* Light cool gray for muted backgrounds */
+    --muted-foreground: 220 10% 45%; /* Muted text */
+
+    --accent: 152 53% 58%; /* Alert/Highlight Green #59ce8f */
+    --accent-foreground: 0 0% 100%; /* White text on green */
+
+    --destructive: 0 84% 60%; /* Standard Red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 20% 88%; /* Light cool gray Border, slightly darker than muted bg */
+    --input: 0 0% 100%; /* White input background, with border */
+    --ring: 7 100% 50%; /* Brightly Orange for focus ring */
+
+    --dimly-blue-background: 196 83% 95%; /* Dimly Blue #e8f9fd - for specific sections like hero */
+
+    --radius: 0.5rem;
+
+    /* Chart colors */
+    --chart-1: 7 100% 50%;   /* Primary Orange */
+    --chart-2: 152 53% 58%;  /* Accent Green */
+    --chart-3: 210 80% 60%;  /* A contrasting blue */
+    --chart-4: 35 100% 60%;  /* A yellow/gold */
+    --chart-5: 7 80% 70%;   /* Lighter Orange */
+
+    /* Admin Sidebar colors - Light Theme */
+    --sidebar-background: 0 0% 100%; /* White sidebar */
+    --sidebar-foreground: 220 15% 35%; /* Darker gray text for readability */
+    --sidebar-border: 220 15% 90%; /* Light border */
+    --sidebar-accent: 7 100% 95%; /* Very light orange for hover/active background */
+    --sidebar-accent-foreground: 7 100% 45%; /* Primary orange for text on hover/active */
+    --sidebar-primary: 7 100% 50%; /* Primary orange for active indicators/icons */
+    --sidebar-primary-foreground: 0 0% 100%; /* White text on primary */
+    --sidebar-ring: 7 100% 50%;
+  }
+
+  .dark {
+    /* Dark mode: Orange and Green on a very dark background */
+    --background: 220 15% 10%; /* Very dark cool gray */
+    --foreground: 220 10% 88%; /* Light gray/blue text */
+
+    --card: 220 15% 15%;
+    --card-foreground: 220 10% 88%;
+
+    --popover: 220 15% 12%;
+    --popover-foreground: 220 10% 88%;
+
+    --primary: 7 100% 55%; /* Brightly Orange (slightly lighter for dark mode) */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 7 90% 45%; /* Darker Muted Orange */
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 220 15% 22%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 152 53% 62%; /* Alert/Highlight Green (slightly lighter) */
+    --accent-foreground: 0 0% 0%; /* Black text on green for dark mode */
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 18%;
+    --ring: 7 100% 55%;
+    
+    --dimly-blue-background: 196 50% 20%; /* Darker version of Dimly Blue for dark mode accents */
+
+    /* Admin Sidebar colors - Dark Theme */
+    --sidebar-background: 220 15% 12%; /* Darker than main dark card, slightly lighter than main dark bg */
+    --sidebar-foreground: 220 10% 80%; /* Light gray text */
+    --sidebar-border: 220 15% 20%; /* Border for dark sidebar */
+    --sidebar-accent: 220 15% 22%; /* Hover/active background for dark sidebar */
+    --sidebar-accent-foreground: 7 100% 60%; /* Primary orange for text on hover/active */
+    --sidebar-primary: 7 100% 55%; /* Primary orange for active indicators/icons */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-ring: 7 100% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  progress {
+    @apply rounded-lg border border-border;
+    accent-color: hsl(var(--primary)); /* For some browsers like Chrome/Edge */
+    /* Fallback for Firefox and older browsers for the bar itself */
+    background-color: hsl(var(--secondary) / 0.3); /* Track color */
+  }
+
+  progress::-webkit-progress-bar {
+    @apply bg-secondary/30 rounded-lg;
+  }
+  progress::-webkit-progress-value {
+    @apply bg-primary rounded-lg transition-all duration-300 ease-in-out;
+  }
+  progress::-moz-progress-bar { /* Firefox */
+    @apply bg-primary rounded-lg transition-all duration-300 ease-in-out;
+  }
+}

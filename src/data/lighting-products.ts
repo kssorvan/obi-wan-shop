@@ -1,0 +1,187 @@
+
+import type { Product } from '@/types';
+
+export interface LightingCategory {
+  name: string;
+  filters: { id: string; label: string; value: string }[];
+}
+
+export const lightingCategoriesAndFilters: LightingCategory[] = [
+  {
+    name: 'New',
+    filters: [
+      { id: 'last-30-days', label: 'Last 30 Days', value: 'last 30 days' },
+      { id: 'last-6-months', label: 'Last 6 Months', value: 'last 6 months' },
+    ],
+  },
+  {
+    name: 'Lamps',
+    filters: [
+      { id: 'table-lamps', label: 'Table Lamps', value: 'table lamps' },
+      { id: 'desk-lamps', label: 'Desk Lamps', value: 'desk lamps' },
+      { id: 'floor-lamps', label: 'Floor Lamps', value: 'floor lamps' },
+    ],
+  },
+  {
+    name: 'Ceiling',
+    filters: [
+      { id: 'chandeliers', label: 'Chandeliers', value: 'chandeliers' },
+      { id: 'pendant', label: 'Pendant', value: 'pendant' },
+      { id: 'flush', label: 'Flush', value: 'flush' },
+      { id: 'fans', label: 'Fans', value: 'fans' },
+    ],
+  },
+  {
+    name: 'By Room',
+    filters: [
+      { id: 'bedroom', label: 'Bedroom', value: 'bedroom' },
+      { id: 'dining-room', label: 'Dining Room', value: 'dining room' },
+      { id: 'kitchen', label: 'Kitchen', value: 'kitchen' },
+      { id: 'living-room', label: 'Living Room', value: 'living room' },
+      { id: 'bathroom', label: 'Bathroom', value: 'bathroom' },
+      { id: 'entryway', label: 'Entryway', value: 'entryway' },
+      { id: 'outdoor', label: 'Outdoor', value: 'outdoor' },
+    ],
+  },
+  {
+    name: 'Kids',
+    filters: [
+      { id: 'kids-lamps', label: 'Lamps', value: 'kids lamps' }, // Changed value to avoid conflict
+      { id: 'night-lights', label: 'Night Lights', value: 'night lights' },
+      { id: 'kids-ceiling', label: 'Ceiling', value: 'kids ceiling' }, // Changed value to avoid conflict
+    ],
+  },
+];
+
+export const mockLightingProducts: Product[] = [
+  {
+    id: 'L1',
+    name: 'Modern Arc Floor Lamp',
+    description: 'Elegant arc floor lamp with a marble base, perfect for living rooms.',
+    price: 189.99,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'floor lamp modern',
+    rating: 4.7,
+    reviewsCount: 75,
+    tags: ['floor lamps', 'living room', 'last 6 months'],
+    stock: 15,
+  },
+  {
+    id: 'L2',
+    name: 'Industrial Pendant Light',
+    description: 'Vintage industrial pendant light for kitchen islands or dining areas.',
+    price: 79.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'pendant light industrial',
+    rating: 4.5,
+    reviewsCount: 110,
+    tags: ['pendant', 'kitchen', 'dining room', 'last 30 days'],
+    stock: 25,
+  },
+  {
+    id: 'L3',
+    name: 'Minimalist Desk Lamp',
+    description: 'Sleek LED desk lamp with adjustable brightness. Ideal for work or study.',
+    price: 49.50,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'desk lamp led',
+    rating: 4.8,
+    reviewsCount: 90,
+    tags: ['desk lamps', 'bedroom', 'last 30 days'],
+    stock: 30,
+  },
+  {
+    id: 'L4',
+    name: 'Crystal Chandelier',
+    description: 'Luxurious crystal chandelier for a grand entryway or dining room statement.',
+    price: 399.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'chandelier crystal',
+    rating: 4.9,
+    reviewsCount: 45,
+    tags: ['chandeliers', 'dining room', 'entryway'],
+    stock: 10,
+  },
+  {
+    id: 'L5',
+    name: 'Rustic Table Lamp Set',
+    description: 'Set of two rustic table lamps for a cozy bedroom or living room ambiance.',
+    price: 99.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'table lamp rustic',
+    rating: 4.6,
+    reviewsCount: 60,
+    tags: ['table lamps', 'bedroom', 'living room', 'last 6 months'],
+    stock: 22,
+  },
+  {
+    id: 'L6',
+    name: 'Outdoor Wall Sconce',
+    description: 'Weather-resistant outdoor wall sconce for patios and entryways.',
+    price: 65.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'outdoor light wall',
+    rating: 4.4,
+    reviewsCount: 50,
+    tags: ['outdoor', 'entryway'],
+    stock: 18,
+  },
+  {
+    id: 'L7',
+    name: 'Kids Starry Night Light',
+    description: 'Fun and calming starry night light projector for kids\' bedrooms.',
+    price: 29.99,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'night light kids',
+    rating: 4.7,
+    reviewsCount: 120,
+    tags: ['night lights', 'kids lamps', 'bedroom', 'last 30 days'],
+    stock: 40,
+  },
+  {
+    id: 'L8',
+    name: 'Flush Mount Ceiling Light',
+    description: 'Modern flush mount LED ceiling light for hallways or bathrooms.',
+    price: 59.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'ceiling light flush',
+    rating: 4.3,
+    reviewsCount: 80,
+    tags: ['flush', 'bathroom', 'entryway', 'kids ceiling'],
+    stock: 35,
+  },
+   {
+    id: 'L9',
+    name: 'Smart Ceiling Fan with Light',
+    description: 'Ceiling fan with integrated LED light, controllable via app.',
+    price: 229.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'ceiling fan smart',
+    rating: 4.6,
+    reviewsCount: 55,
+    tags: ['fans', 'living room', 'bedroom', 'last 6 months'],
+    stock: 12,
+  },
+  {
+    id: 'L10',
+    name: 'Dimmable Bedside Lamp',
+    description: 'Touch-control dimmable bedside lamp with USB charging port.',
+    price: 42.00,
+    category: 'Lighting',
+    imageUrl: 'https://placehold.co/600x600.png',
+    dataAiHint: 'bedside lamp touch',
+    rating: 4.8,
+    reviewsCount: 95,
+    tags: ['table lamps', 'bedroom', 'last 30 days'],
+    stock: 28,
+  }
+];
