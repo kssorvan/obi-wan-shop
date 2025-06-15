@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 
-// Define path prefixes within the /client group that are guest-accessible
+// Define path prefixes within the /cilent group that are guest-accessible
 // Note: These are prefixes, so /products will cover /products/[id] etc.
 const GUEST_ACCESSIBLE_CLIENT_PREFIXES = [
   '/home',
@@ -26,11 +26,11 @@ export default function AppLayout({
 
   useEffect(() => {
     if (!isLoading && !user) {
-      // Pathname will be like "/client/home", "/client/products/123", etc.
-      // We need to check if the path *after* "/client" is guest-accessible.
-      const clientSpecificPath = pathname.startsWith('/client') 
-        ? pathname.substring('/client'.length) || '/' // if just /client, treat as /
-        : pathname; // Should not happen if this layout is only for /client paths
+      // Pathname will be like "/cilent/home", "/cilent/products/123", etc.
+      // We need to check if the path *after* "/cilent" is guest-accessible.
+      const clientSpecificPath = pathname.startsWith('/cilent') 
+        ? pathname.substring('/cilent'.length) || '/' // if just /cilent, treat as /
+        : pathname; // Should not happen if this layout is only for /cilent paths
 
       const isGuestAccessibleRoute = GUEST_ACCESSIBLE_CLIENT_PREFIXES.some(
         (prefix) => clientSpecificPath.startsWith(prefix)
@@ -46,7 +46,7 @@ export default function AppLayout({
   // show loader. For guest routes, we might want to show content sooner,
   // but the auth check still needs to complete.
   // The condition below ensures loader shows if auth is pending and route is protected.
-  const clientSpecificPath = pathname.startsWith('/client') ? pathname.substring('/client'.length) || '/' : pathname;
+  const clientSpecificPath = pathname.startsWith('/cilent') ? pathname.substring('/cilent'.length) || '/' : pathname;
   const isPotentiallyProtected = !GUEST_ACCESSIBLE_CLIENT_PREFIXES.some(prefix => clientSpecificPath.startsWith(prefix));
 
   if (isLoading && (isPotentiallyProtected || !user)) {

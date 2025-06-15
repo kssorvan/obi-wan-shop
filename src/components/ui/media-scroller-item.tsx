@@ -44,8 +44,8 @@ export function MediaScrollerItem({
       </div>
       {(title || subtitle) && (
         <CardContent className="p-3">
-          {title && <h3 className="text-sm font-semibold truncate text-primary">{title}</h3>}
-          {subtitle && <p className="text-xs text-muted-foreground truncate">{subtitle}</p>}
+          {title && <h3 className="text-base font-semibold truncate text-primary group-hover:text-primary/90">{title}</h3>}
+          {subtitle && <p className="text-sm text-muted-foreground group-hover:text-accent font-medium">{subtitle}</p>}
         </CardContent>
       )}
     </Card>

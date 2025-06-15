@@ -152,7 +152,7 @@ export default function AdminOrdersPage() {
                           <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                             <DropdownMenuItem asChild>
-                               <Link href={`/admin/orders/details/${order.id}`}><Eye className="mr-2 h-4 w-4" /> View Details</Link>
+                               <Link href={`/admin/orders/${order.id}`}><Eye className="mr-2 h-4 w-4" /> View Details</Link>
                             </DropdownMenuItem>
                              <DropdownMenuItem>
                                <Edit className="mr-2 h-4 w-4" /> Update Status

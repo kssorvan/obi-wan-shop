@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { PlusCircle, MoreHorizontal, Search, Edit, Trash2, Eye, Filter } from "lucide-react";
+import { PlusCircle, MoreHorizontal, Search, Edit, Trash2, Eye, Filter, ShoppingBag } from "lucide-react";
 import { mockAdminProducts } from "@/data/admin-mock-data";
 import type { AdminProduct } from "@/types";
 
@@ -48,11 +48,13 @@ export default function AdminProductsPage() {
         <CardHeader>
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
             <div>
-              <CardTitle className="text-2xl font-headline text-primary">Manage Products</CardTitle>
+              <CardTitle className="text-2xl font-headline text-primary flex items-center">
+                <ShoppingBag className="mr-2 h-6 w-6"/> Manage Products
+              </CardTitle>
               <CardDescription>View, add, edit, or remove products from your store.</CardDescription>
             </div>
             <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              <Link href="/admin/products/add"> {/* Placeholder for add page */}
+              <Link href="/admin/products/new">
                 <PlusCircle className="mr-2 h-4 w-4" /> Add New Product
               </Link>
             </Button>
@@ -138,7 +140,7 @@ export default function AdminProductsPage() {
                               <Link href={`/products/${product.id}`} target="_blank"><Eye className="mr-2 h-4 w-4" /> View Live</Link>
                             </DropdownMenuItem>
                             <DropdownMenuItem asChild>
-                               <Link href={`/admin/products/edit/${product.id}`}><Edit className="mr-2 h-4 w-4" /> Edit</Link>
+                               <Link href={`/admin/products/${product.id}/edit`}><Edit className="mr-2 h-4 w-4" /> Edit</Link>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={() => handleDeleteProduct(product.id)} className="text-destructive focus:text-destructive focus:bg-destructive/10">

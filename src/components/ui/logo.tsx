@@ -41,7 +41,7 @@ export function Logo({ size = 'md', className, iconOnly = false, ariaLabel }: Lo
 
   return (
     <Link 
-      href="/home" 
+      href="/" // Changed from "/home" to "/"
       className={cn(
         'flex items-center gap-2 text-primary hover:text-primary/90 transition-colors group',
         className

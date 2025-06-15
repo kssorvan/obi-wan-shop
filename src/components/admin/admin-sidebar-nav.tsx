@@ -4,13 +4,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { LayoutDashboard, ShoppingBag, Users, Package, Settings } from 'lucide-react'; // Changed BarChart to Package
+import { LayoutDashboard, ShoppingBag, Users, Package, Settings } from 'lucide-react';
 
 const adminNavItems = [
-  { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/products', label: 'Products', icon: ShoppingBag },
-  { href: '/admin/orders', label: 'Orders', icon: Package }, // Changed icon
-  { href: '/admin/users', label: 'Users', icon: Users },
+  { href: '/admin/orders', label: 'Orders', icon: Package },
+  { href: '/admin/customers', label: 'Customers', icon: Users },
   { href: '/admin/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -24,8 +24,8 @@ export function AdminSidebarNav({ onLinkClick }: AdminSidebarNavProps) {
   return (
     <nav className="flex flex-col space-y-1 p-4">
       {adminNavItems.map((item) => {
-        // Exact match for dashboard, startsWith for others to handle sub-routes like /admin/products/add
-        const isActive = item.href === '/admin/dashboard' ? pathname === item.href : pathname.startsWith(item.href);
+        // Exact match for dashboard, startsWith for others to handle sub-routes
+        const isActive = item.href === '/admin' ? pathname === item.href : pathname.startsWith(item.href);
         const Icon = item.icon;
         return (
           <Link

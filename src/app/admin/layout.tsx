@@ -7,7 +7,7 @@ import { Loader2, ShieldAlert, PanelLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Logo } from '@/components/ui/logo';
 import { Button } from '@/components/ui/button';
-import { AdminSidebarNav } from '@/components/admin/admin-sidebar-nav';
+import { Sidebar } from '@/components/layout/Sidebar'; // Updated import
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function AdminLayout({
@@ -17,8 +17,8 @@ export default function AdminLayout({
 }) {
   const { user, isLoading, signOut } = useAuth();
   const router = useRouter();
-  const [sidebarOpen, setSidebarOpen] = useState(true); // For desktop
-  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); // For mobile sheet
+  const [sidebarOpen, setSidebarOpen] = useState(true); 
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false); 
 
   useEffect(() => {
     if (!isLoading && (!user || (user.role !== 'admin' && user.role !== 'superuser'))) {
@@ -40,38 +40,36 @@ export default function AdminLayout({
         <ShieldAlert className="h-16 w-16 text-destructive mb-4" />
         <h1 className="text-2xl font-bold text-destructive mb-2">Access Denied</h1>
         <p className="text-muted-foreground mb-6">You do not have permission to view this page.</p>
-        <Button onClick={() => router.push('/home')}>Go to Homepage</Button>
+        <Button onClick={() => router.push('/shop/products')}>Go to Shop</Button> {/* Updated redirect for regular users */}
       </div>
     );
   }
 
   return (
     <div className="flex min-h-screen bg-muted/40 text-sidebar-foreground">
-      {/* Desktop Sidebar */}
       <aside 
         className={`hidden md:flex flex-col w-64 bg-sidebar border-r border-sidebar-border transition-all duration-300 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full w-0"
         }`}
       >
         <div className="p-4 border-b border-sidebar-border flex items-center justify-between">
-          <Link href="/admin/dashboard" className="flex items-center">
+          <Link href="/admin/dashboard" className="flex items-center"> {/* Updated Link */}
             <Logo size="sm" />
             <span className="ml-2 text-lg font-semibold text-sidebar-primary">Admin</span>
           </Link>
         </div>
-        <AdminSidebarNav onLinkClick={() => {}} />
+        <Sidebar onLinkClick={() => {}} /> {/* Updated component */}
       </aside>
 
-      {/* Mobile Sidebar (Sheet) */}
       <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
         <SheetContent side="left" className="w-72 p-0 pt-0 bg-sidebar text-sidebar-foreground border-r border-sidebar-border md:hidden">
             <div className="p-4 border-b border-sidebar-border flex items-center justify-between">
-              <Link href="/admin/dashboard" className="flex items-center">
+              <Link href="/admin/dashboard" className="flex items-center"> {/* Updated Link */}
                 <Logo size="sm" />
                 <span className="ml-2 text-lg font-semibold text-sidebar-primary">Admin</span>
               </Link>
             </div>
-          <AdminSidebarNav onLinkClick={() => setMobileSidebarOpen(false)} />
+          <Sidebar onLinkClick={() => setMobileSidebarOpen(false)} /> {/* Updated component */}
         </SheetContent>
       </Sheet>
       

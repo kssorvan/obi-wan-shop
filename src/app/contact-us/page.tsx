@@ -1,63 +1,43 @@
+"use client";
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Mail, MessageSquare, Phone } from "lucide-react";
+import Link from 'next/link';
+import { Logo } from '@/components/ui/logo';
+import { Separator } from '@/components/ui/separator';
 
-export default function ContactUsPage() {
+const footerNavItems = [
+  { href: '/about', label: 'About Us' }, // Path updated
+  { href: '/contact', label: 'Contact Us' }, // Path updated
+  { href: '/help', label: 'FAQs' }, // Path updated to /help
+  { href: '/style-guide/buttons', label: 'Button Styles' }, // Assuming this remains or moves to a (dev) group
+  { href: '/legal/privacy-policy', label: 'Privacy Policy' }, // Assuming this remains or moves
+  { href: '/legal/terms-of-service', label: 'Terms of Service' }, // Assuming this remains or moves
+];
+
+export function SiteFooter() {
   return (
-    <div className="container py-12 max-w-3xl mx-auto">
-      <Card className="shadow-lg">
-        <CardHeader className="text-center pb-8">
-          <MessageSquare className="mx-auto h-16 w-16 text-primary mb-6" />
-          <CardTitle className="text-4xl font-headline text-primary">Get In Touch</CardTitle>
-          <CardDescription className="text-lg text-muted-foreground pt-2 max-w-xl mx-auto">
-            We&apos;d love to hear from you! Whether you have a question about our products, features, or anything else, our team is ready to answer all your questions.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-xl font-semibold text-primary mb-2 flex items-center"><Mail className="mr-2 h-5 w-5"/> Email Us</h3>
-                <p className="text-muted-foreground">For general inquiries, support, or feedback:</p>
-                <a href="mailto:support@obiwanshop.com" className="text-accent hover:underline">support@obiwanshop.com</a>
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-primary mb-2 flex items-center"><Phone className="mr-2 h-5 w-5"/> Call Us (Mon-Fri, 9am-5pm)</h3>
-                <p className="text-muted-foreground">Speak to our customer service team:</p>
-                <a href="tel:+1234567890" className="text-accent hover:underline">+1 (234) 567-890</a>
-              </div>
-               <div>
-                <h3 className="text-xl font-semibold text-primary mb-2">Office Address</h3>
-                <p className="text-muted-foreground">Obi-Wan-Shop Headquarters<br/>123 Force Lane<br/>Coruscant, CO 54321</p>
-              </div>
-            </div>
-            
-            <form className="space-y-4">
-              <div>
-                <Label htmlFor="name" className="text-foreground">Full Name</Label>
-                <Input type="text" id="name" placeholder="Your Name" className="mt-1" />
-              </div>
-              <div>
-                <Label htmlFor="email" className="text-foreground">Email Address</Label>
-                <Input type="email" id="email" placeholder="you@example.com" className="mt-1" />
-              </div>
-              <div>
-                <Label htmlFor="subject" className="text-foreground">Subject</Label>
-                <Input type="text" id="subject" placeholder="How can we help?" className="mt-1" />
-              </div>
-              <div>
-                <Label htmlFor="message" className="text-foreground">Message</Label>
-                <Textarea id="message" placeholder="Your message..." rows={5} className="mt-1" />
-              </div>
-              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">Send Message</Button>
-            </form>
+    <footer className="bg-card border-t border-border text-card-foreground">
+      <div className="container py-8 md:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          <div className="md:col-span-1 flex justify-center md:justify-start">
+            <Logo size="md" />
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          <nav className="md:col-span-2 flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+            {footerNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <Separator className="my-6 md:my-8 bg-border" />
+        <p className="text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} Obi-Wan-Shop. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }

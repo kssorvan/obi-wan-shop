@@ -1,58 +1,43 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { HelpCircle } from "lucide-react";
+"use client";
 
-const faqData = [
-  {
-    question: "How does the AI style recommendation work?",
-    answer: "Our AI analyzes your purchase history, browsing behavior, and favorited items to understand your preferences. It then suggests products that match your style, considering current trends and item compatibility."
-  },
-  {
-    question: "What payment methods do you accept?",
-    answer: "We accept major credit cards (Visa, MasterCard, American Express), PayPal, and other digital payment methods. All transactions are securely processed."
-  },
-  {
-    question: "How can I track my order?",
-    answer: "Once your order is shipped, you will receive an email with a tracking number and a link to the carrier's website. You can also find tracking information in your order history under 'My Orders'."
-  },
-  {
-    question: "What is your return policy?",
-    answer: "We offer a 30-day return policy for most items in new and unused condition with original tags attached. Some exclusions may apply. Please visit our Returns & Exchanges page for full details."
-  },
-  {
-    question: "How do I update my shipping address?",
-    answer: "You can update your shipping address in your account profile under 'Manage Addresses'. If you need to change the address for an order already placed, please contact customer support as soon as possible."
-  },
-  {
-    question: "Is my personal information secure?",
-    answer: "Yes, we take your privacy and security very seriously. We use industry-standard encryption and security protocols to protect your personal information. Please refer to our Privacy Policy for more details."
-  }
+import Link from 'next/link';
+import { Logo } from '@/components/ui/logo';
+import { Separator } from '@/components/ui/separator';
+
+const footerNavItems = [
+  { href: '/about', label: 'About Us' }, // Path updated
+  { href: '/contact', label: 'Contact Us' }, // Path updated
+  { href: '/help', label: 'FAQs' }, // Path updated to /help
+  { href: '/style-guide/buttons', label: 'Button Styles' }, // Assuming this remains or moves to a (dev) group
+  { href: '/legal/privacy-policy', label: 'Privacy Policy' }, // Assuming this remains or moves
+  { href: '/legal/terms-of-service', label: 'Terms of Service' }, // Assuming this remains or moves
 ];
 
-export default function FAQsPage() {
+export function SiteFooter() {
   return (
-    <div className="container py-12 max-w-3xl mx-auto">
-      <Card className="shadow-lg">
-        <CardHeader className="text-center">
-          <HelpCircle className="mx-auto h-12 w-12 text-primary mb-4" />
-          <CardTitle className="text-4xl font-headline text-primary">Frequently Asked Questions</CardTitle>
-          <CardDescription className="text-lg text-muted-foreground pt-1">Find answers to common questions about StyleSense AI.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Accordion type="single" collapsible className="w-full">
-            {faqData.map((faq, index) => (
-              <AccordionItem value={`item-${index}`} key={index}>
-                <AccordionTrigger className="text-lg text-left hover:text-primary font-medium">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-md text-foreground/80 leading-relaxed">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+    <footer className="bg-card border-t border-border text-card-foreground">
+      <div className="container py-8 md:py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+          <div className="md:col-span-1 flex justify-center md:justify-start">
+            <Logo size="md" />
+          </div>
+          <nav className="md:col-span-2 flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
+            {footerNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.label}
+              </Link>
             ))}
-          </Accordion>
-        </CardContent>
-      </Card>
-    </div>
+          </nav>
+        </div>
+        <Separator className="my-6 md:my-8 bg-border" />
+        <p className="text-center text-sm text-muted-foreground">
+          © {new Date().getFullYear()} Obi-Wan-Shop. All rights reserved.
+        </p>
+      </div>
+    </footer>
   );
 }

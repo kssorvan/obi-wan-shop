@@ -1,5 +1,4 @@
 
-
 // This Product type is based on the original fashion app and current ProductCard component.
 // It will need to be reconciled with the new motorcycle database schema.
 export interface Product {
@@ -7,7 +6,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
-  category: string;
+  category: string; // This might become categoryId or a Category object
   imageUrl: string;
   dataAiHint?: string;
   rating?: number | null; // Allow null for rating
@@ -38,6 +37,16 @@ export interface MotorcycleProductDBSchema {
   updated_at: Date;
   // Related data (example, actual structure depends on Prisma schema)
   categories?: { category_name: string } | null;
+}
+
+export interface Category {
+  id: string; // Or number, depending on API response
+  name: string;
+  slug: string; // For generating links, e.g., /shop/categories/electronics
+  description?: string | null;
+  image_url?: string | null; // URL for the category image
+  dataAiHint?: string | null; // For AI image suggestions for the category image
+  // products_count?: number; // Optional: if API provides this
 }
 
 
@@ -137,3 +146,4 @@ export interface AdminShippingSettings {
   defaultShippingRate: number;
   freeShippingThreshold: number;
 }
+

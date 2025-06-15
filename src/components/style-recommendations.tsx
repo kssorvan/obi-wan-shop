@@ -2,23 +2,18 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-// Genkit imports removed:
-// import { styleRecommendation, type StyleRecommendationOutput } from '@/ai/flows/style-recommendation';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, Wand2 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { mockProducts } from '@/data/products'; // Keep for displaying mock products if needed as fallback
-import { ProductCard } from '@/components/product/product-card';
+import { mockProducts } from '@/data/products';
+import { ProductCard } from '@/components/shop/ProductCard'; // Updated import
 import type { Product } from '@/types';
 
-// Placeholder for what StyleRecommendationOutput might look like if fetched from Laravel
 interface StyleRecommendationOutput {
   recommendations: string;
-  // Potentially add product_ids or other structured data from Laravel
 }
-
 
 export function StyleRecommendations() {
   const { user } = useAuth();
@@ -39,31 +34,24 @@ export function StyleRecommendations() {
     setRecommendedProducts([]);
 
     try {
-      // TODO: Replace with actual API call to your Laravel backend
-      // const purchaseHistory = JSON.stringify(user.purchaseHistory || []);
-      // const browsingHistory = JSON.stringify(user.browsingHistory || []);
-      
-      // const response = await fetch('/api/laravel-style-recommendations', { // Example endpoint
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ userId: user.id, purchaseHistory, browsingHistory })
-      // });
-      // if (!response.ok) throw new Error('Failed to fetch recommendations from backend.');
-      // const result: StyleRecommendationOutput = await response.json();
-      
-      // Mock result as Genkit is removed
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate network delay
+      // Simulate API call to Genkit flow
+      // In a real app, this would call the Genkit flow deployed as an API endpoint
+      // For now, mock the response
+      await new Promise(resolve => setTimeout(resolve, 1500)); 
       const result: StyleRecommendationOutput = {
+        // Mocked recommendations text
         recommendations: "Based on your interest in modern and minimalist styles, we think you'll love these selections. (Connect to Laravel API for real recommendations)"
       };
       setRecommendations(result);
 
+      // Mock product filtering based on recommendations text
+      // This is a very basic mock, real logic would depend on how Genkit output is structured
       if (result.recommendations) {
         const keywords = result.recommendations.toLowerCase().split(/\s+/).filter(k => k.length > 3);
         const productsToDisplay = mockProducts.filter(p => 
           keywords.some(keyword => p.name.toLowerCase().includes(keyword) || (p.description && p.description.toLowerCase().includes(keyword)))
-        ).slice(0, 3); 
-        setRecommendedProducts(productsToDisplay.length > 0 ? productsToDisplay : mockProducts.slice(0,3));
+        ).slice(0, 3); // Show up to 3 mock recommended products
+        setRecommendedProducts(productsToDisplay.length > 0 ? productsToDisplay : mockProducts.slice(0,3)); // Fallback to first 3 if no match
       }
 
     } catch (err) {
@@ -75,11 +63,12 @@ export function StyleRecommendations() {
   };
 
   useEffect(() => {
+    // Fetch recommendations only if user is logged in
     if (user) {
       fetchRecommendations();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]); 
+  }, [user]); // Re-fetch when user changes
 
 
   if (!user) {
