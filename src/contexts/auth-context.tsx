@@ -4,9 +4,22 @@
 
 import type { User } from '@/types';
 import type React from 'react';
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import { getFromApi, postToApi } from '@/lib/api'; // Import API service
+import { getFromApi, postToApi } from '@/lib/api';
+import { jwtDecode } from 'jwt-decode'; // Correct import for jwt-decode v4+
+
+const AUTH_TOKEN_KEY = 'obiwanshop_auth_token';
+
+interface DecodedJwtPayload {
+  sub: string; // Subject (user ID)
+  email: string;
+  name?: string;
+  role?: 'user' | 'admin' | 'superuser';
+  exp: number; // Expiration time (timestamp)
+  iat?: number; // Issued at (timestamp)
+  // Add any other custom claims your JWT includes
+}
 
 interface AuthContextType {
   user: User | null;
@@ -14,71 +27,97 @@ interface AuthContextType {
   signIn: (email: string, pass: string) => Promise<User>;
   signUp: (email: string, pass: string, name?: string) => Promise<void>;
   signOut: () => Promise<void>;
-  recheckUser: () => Promise<void>; // Added for explicit re-check
+  recheckUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Mock user data only for frontend fallback if API fails or during initial dev
-// const MOCK_USER_ID = 'user-123-stylesense';
-// const mockBaseUser: Omit<User, 'id' | 'email' | 'role'> = {
-//   name: 'Test User',
-//   purchaseHistory: [
-//     { productId: '1', name: 'Classic Comfort Tee', date: '2024-05-15', price: 29.99 },
-//     { productId: '3', name: 'Trailblazer Sneakers', date: '2024-04-20', price: 120.00 },
-//   ],
-//   browsingHistory: [
-//     { productId: '2', name: 'Urban Slim Jeans', viewedAt: new Date(Date.now() - 86400000 * 2).toISOString() },
-//     { productId: '4', name: 'Minimalist Leather Wallet', viewedAt: new Date(Date.now() - 86400000).toISOString() },
-//   ],
-// };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const fetchUser = async () => {
-    setIsLoading(true);
+  const storeTokenAndSetUser = (token: string) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+    }
     try {
-      // Laravel Sanctum's /api/user endpoint typically returns the authenticated user
-      // if the session cookie is valid.
-      const fetchedUser = await getFromApi<User>('/user');
-      setUser(fetchedUser);
+      const decoded = jwtDecode<DecodedJwtPayload>(token);
+      const currentUser: User = {
+        id: decoded.sub,
+        email: decoded.email,
+        name: decoded.name,
+        role: decoded.role || 'user',
+        // Mock purchase/browsing history for now, or fetch separately if needed
+        purchaseHistory: [], 
+        browsingHistory: [],
+      };
+      setUser(currentUser);
+      return currentUser;
     } catch (error) {
-      // This error means user is not authenticated or API is down
-      // console.warn("Failed to fetch user, likely not authenticated:", error);
+      console.error("Failed to decode JWT:", error);
       setUser(null);
-    } finally {
-      setIsLoading(false);
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+      }
+      return null;
     }
   };
+
+  const loadUserFromToken = useCallback(() => {
+    if (typeof window === 'undefined') {
+      setIsLoading(false); // No localStorage on server
+      return;
+    }
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
+    if (token) {
+      try {
+        const decoded = jwtDecode<DecodedJwtPayload>(token);
+        if (decoded.exp * 1000 > Date.now()) { // Check expiration
+          const currentUser: User = {
+            id: decoded.sub,
+            email: decoded.email,
+            name: decoded.name,
+            role: decoded.role || 'user',
+            purchaseHistory: [],
+            browsingHistory: [],
+          };
+          setUser(currentUser);
+        } else {
+          // Token expired
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error decoding token on load:", error);
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        setUser(null);
+      }
+    }
+    setIsLoading(false);
+  }, []);
   
   useEffect(() => {
-    // Initial check to see if user is already authenticated (e.g., via existing session cookie)
-    fetchUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    loadUserFromToken();
+  }, [loadUserFromToken]);
 
   const signIn = async (email: string, password: string): Promise<User> => {
     setIsLoading(true);
     try {
-      // 1. (Optional but recommended for SPAs with Sanctum) Ensure CSRF cookie is fresh
-      // await getFromApi('/sanctum/csrf-cookie'); // Axios handles this automatically
-
-      // 2. Attempt login
-      const response = await postToApi<{ user: User }>('/login', { email, password });
-      
-      if (response.user) {
-        setUser(response.user);
-        // No need to store in localStorage if using HttpOnly session cookies managed by Laravel
-        return response.user;
+      // API should return { token: "your_jwt_token" } on successful login
+      const response = await postToApi<{ token: string; user: User }>('/login', { email, password }); 
+      if (response.token) {
+        const signedInUser = storeTokenAndSetUser(response.token);
+        if (signedInUser) return signedInUser;
+        throw new Error("Failed to process token after login.");
       } else {
-        throw new Error("Login response did not include user data.");
+        throw new Error("Login response did not include a token.");
       }
     } catch (error) {
       setUser(null);
-      // Error will be re-thrown by fetcher, containing message from Laravel if available
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+      }
       throw error;
     } finally {
       setIsLoading(false);
@@ -88,15 +127,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signUp = async (email: string, password: string, name?: string) => {
     setIsLoading(true);
     try {
-      // await getFromApi('/sanctum/csrf-cookie'); // For CSRF if needed
-      await postToApi<{ user: User }>('/register', { email, password, name, password_confirmation: password /* if using 'confirmed' rule */ });
-      // After successful registration, Laravel might automatically log them in
-      // or you might redirect to login, or fetch user data.
-      // For now, we'll fetch user data to confirm session.
-      await fetchUser();
-      router.push('/home'); // Redirect after sign up to home
+      // API might return { token: "...", user: {...} } or just a success message
+      // If it returns a token, we log the user in directly.
+      const response = await postToApi<{ token?: string; user?: User  }>('/register', { email, password, name, password_confirmation: password });
+      if (response.token) {
+        storeTokenAndSetUser(response.token);
+        // router.push('/home'); // Or wherever you want to redirect after signup
+      } else {
+        // If no token, maybe redirect to login or show success message
+        // For now, assume direct login is not happening, user needs to sign in.
+        // Or, if your API logs them in and provides user data (but no token initially shown):
+        if(response.user) setUser(response.user); // Fallback if API sends user but no token immediately.
+      }
+       // After successful registration, redirect to login or fetch user data if API auto-logs in
+       // For JWT, it's common to get a token back. If not, they need to login.
+       // router.push('/auth/signin?message=Registration%20successful.%20Please%20sign%20in.');
     } catch (error) {
-      // Error will be re-thrown by fetcher
       throw error;
     } finally {
       setIsLoading(false);
@@ -105,24 +151,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signOut = async () => {
     setIsLoading(true);
+    setUser(null);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(AUTH_TOKEN_KEY);
+    }
     try {
-      // await getFromApi('/sanctum/csrf-cookie'); // For CSRF if needed
-      await postToApi('/logout', {});
+      // Optionally, call a backend endpoint to invalidate the token (if using a blacklist)
+      await postToApi('/logout', {}); 
     } catch (error) {
-      console.error("Sign out failed on backend, clearing session locally anyway:", error);
+      console.warn("Error during server-side logout (token invalidation might have failed):", error);
     } finally {
-      setUser(null);
-      // If you were using localStorage for tokens, clear it here.
-      // With HttpOnly cookies, this client-side clear isn't strictly necessary for the cookie itself.
       setIsLoading(false);
-      // router.push('/auth/signin'); // Optionally redirect globally after sign out
+      // router.push('/auth/signin'); // Optionally redirect globally
     }
   };
   
   const recheckUser = async () => {
-    await fetchUser();
+    setIsLoading(true);
+    loadUserFromToken();
   };
-
 
   return (
     <AuthContext.Provider value={{ user, isLoading, signIn, signUp, signOut, recheckUser }}>

@@ -5,19 +5,26 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/auth-context';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2 } from 'lucide-react';
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { mockProducts } from '@/data/products';
-import { ProductCard } from '@/components/shop/ProductCard'; // Updated import
+import { Loader2, Wand2, AlertTriangle } from 'lucide-react'; // Added AlertTriangle
+import { Alert, AlertDescription } from "@/components/ui/alert"; // Updated AlertTitle to CardTitle
+import { ProductCard } from '@/components/shop/ProductCard';
 import type { Product } from '@/types';
+import { postToApi } from '@/lib/api'; // Import postToApi
 
-interface StyleRecommendationOutput {
-  recommendations: string;
+interface StyleRecommendationInput {
+  purchaseHistory: string; // Assuming JSON string as per Genkit flow
+  browsingHistory: string; // Assuming JSON string
+}
+
+interface StyleRecommendationApiResponse {
+  recommendations: string; // Textual recommendation
+  // Potentially, the API could also return suggested product IDs or slugs
+  // suggestedProductIds?: string[]; 
 }
 
 export function StyleRecommendations() {
   const { user } = useAuth();
-  const [recommendations, setRecommendations] = useState<StyleRecommendationOutput | null>(null);
+  const [recommendationText, setRecommendationText] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([]);
@@ -30,45 +37,54 @@ export function StyleRecommendations() {
 
     setIsLoading(true);
     setError(null);
-    setRecommendations(null);
+    setRecommendationText(null);
     setRecommendedProducts([]);
 
     try {
-      // Simulate API call to Genkit flow
-      // In a real app, this would call the Genkit flow deployed as an API endpoint
-      // For now, mock the response
-      await new Promise(resolve => setTimeout(resolve, 1500)); 
-      const result: StyleRecommendationOutput = {
-        // Mocked recommendations text
-        recommendations: "Based on your interest in modern and minimalist styles, we think you'll love these selections. (Connect to Laravel API for real recommendations)"
+      const inputPayload: StyleRecommendationInput = {
+        purchaseHistory: JSON.stringify(user.purchaseHistory || []),
+        browsingHistory: JSON.stringify(user.browsingHistory || []),
       };
-      setRecommendations(result);
+      
+      // Assuming your Genkit flow is exposed via a Laravel API endpoint
+      const result = await postToApi<StyleRecommendationApiResponse>('/ai/style-recommendations', inputPayload);
+      
+      setRecommendationText(result.recommendations);
 
-      // Mock product filtering based on recommendations text
-      // This is a very basic mock, real logic would depend on how Genkit output is structured
+      // TODO: Implement logic to fetch actual products based on recommendations
+      // This might involve parsing product IDs/slugs from `result` if your API provides them,
+      // or making another API call to search/filter products based on the recommendation text.
+      // For now, mocking a few products as a placeholder if text is received.
       if (result.recommendations) {
-        const keywords = result.recommendations.toLowerCase().split(/\s+/).filter(k => k.length > 3);
-        const productsToDisplay = mockProducts.filter(p => 
-          keywords.some(keyword => p.name.toLowerCase().includes(keyword) || (p.description && p.description.toLowerCase().includes(keyword)))
-        ).slice(0, 3); // Show up to 3 mock recommended products
-        setRecommendedProducts(productsToDisplay.length > 0 ? productsToDisplay : mockProducts.slice(0,3)); // Fallback to first 3 if no match
+        // This is a placeholder: fetch actual products based on recommendation logic
+        // For example, if result.suggestedProductIds was populated:
+        // const products = await getFromApi<Product[]>(`/products/batch?ids=${result.suggestedProductIds.join(',')}`);
+        // setRecommendedProducts(products);
+        
+        // Fallback mock if no direct product IDs are returned:
+        // You might need a more sophisticated way to get products based on textual recs.
+        // This is a VERY basic mock:
+        const mockProductIds = ['1', '3', '6']; // Example IDs
+        const fetchedProducts = await Promise.all(
+            mockProductIds.map(id => postToApi<Product>(`/products/${id}`, {}).catch(() => null) ) // Use GET or appropriate method
+        );
+        setRecommendedProducts(fetchedProducts.filter(p => p !== null) as Product[]);
       }
 
-    } catch (err) {
+    } catch (err: any) {
       console.error("Error fetching style recommendations:", err);
-      setError("AI recommendations are currently unavailable. Please try again later.");
+      setError(err.message || "AI recommendations are currently unavailable. Please try again later.");
     } finally {
       setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    // Fetch recommendations only if user is logged in
     if (user) {
       fetchRecommendations();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]); // Re-fetch when user changes
+  }, [user]);
 
 
   if (!user) {
@@ -111,15 +127,16 @@ export function StyleRecommendations() {
         )}
         {error && (
            <Alert variant="destructive" className="mb-4">
-            <AlertTitle>Error</AlertTitle>
+            <AlertTriangle className="h-4 w-4" />
+            <CardTitle>Error</CardTitle> {/* Using CardTitle for consistency if AlertTitle is not available in this context */}
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
         
-        {recommendations && !isLoading && (
+        {recommendationText && !isLoading && (
           <div className="space-y-6">
             <p className="text-lg text-foreground leading-relaxed italic border-l-4 border-accent pl-4 py-2 bg-accent/10 rounded-r-md">
-              &quot;{recommendations.recommendations}&quot;
+              &quot;{recommendationText}&quot;
             </p>
             {recommendedProducts.length > 0 && (
               <div>
@@ -131,11 +148,15 @@ export function StyleRecommendations() {
                 </div>
               </div>
             )}
+            {/* Show if AI gave text but no products were found/matched */}
+            {recommendationText && recommendedProducts.length === 0 && !isLoading && (
+                <p className="text-muted-foreground text-center py-4">No specific products matched the recommendation. Explore our collections!</p>
+            )}
           </div>
         )}
 
-        {!isLoading && !recommendations && !error && (
-            <p className="text-muted-foreground py-4 text-center">Click "Refresh Picks" to get your personalized recommendations for Obi-Wan-Shop. (Note: AI features need backend integration)</p>
+        {!isLoading && !recommendationText && !error && (
+            <p className="text-muted-foreground py-4 text-center">Click "Refresh Picks" to get your personalized recommendations for Obi-Wan-Shop.</p>
         )}
       </CardContent>
     </Card>
