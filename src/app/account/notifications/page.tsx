@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { getFromApi, postToApi, deleteFromApi } from '@/lib/api'; // Import API service
 import { useToast } from '@/hooks/use-toast';
-import { Alert } from '@/components/ui/alert';
+import { Alert, AlertTitle } from '@/components/ui/alert';
 
 interface Notification {
   id: string; // Assuming ID is string from backend
@@ -33,7 +33,7 @@ export default function NotificationsPage() {
       // Or an object like { data: Notification[] } if paginated
       const fetchedNotifications = await getFromApi<Notification[]>('/notifications');
       setNotifications(fetchedNotifications || []);
-    } catch (err: any)_MOD_REMOVE_ {
+    } catch (err: any){
       console.error("Failed to fetch notifications:", err);
       setError(err.message || "Could not load notifications. Please try again later.");
       setNotifications([]);

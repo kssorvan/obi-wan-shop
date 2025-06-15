@@ -13,7 +13,7 @@ export interface Product {
   reviewsCount?: number | null; // Allow null
   colors?: string[];
   sizes?: string[];
-  stock?: number | null; // Allow null
+  stock?: number //| null; // Allow null
   tags?: string[];
 }
 

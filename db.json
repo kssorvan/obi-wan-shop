@@ -1,0 +1,903 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Admin User",
+      "email": "admin@example.com",
+      "password": "admin123",
+      "role": "admin",
+      "status": "active",
+      "joinDate": "2024-01-01T00:00:00Z",
+      "lastLogin": "2024-01-15T10:30:00Z",
+      "totalOrders": 0,
+      "totalSpent": 0,
+      "phone": "+1-555-0100",
+      "address": {
+        "street": "123 Admin Street",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "email": "user@example.com",
+      "password": "user123",
+      "role": "user",
+      "status": "active",
+      "joinDate": "2024-01-10T00:00:00Z",
+      "lastLogin": "2024-01-15T09:20:00Z",
+      "totalOrders": 5,
+      "totalSpent": 1247.89,
+      "phone": "+1-555-0101",
+      "address": {
+        "street": "456 Oak Avenue",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipCode": "90210",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 3,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "john123",
+      "role": "user",
+      "status": "active",
+      "joinDate": "2024-01-12T00:00:00Z",
+      "lastLogin": "2024-01-14T15:45:00Z",
+      "totalOrders": 3,
+      "totalSpent": 899.97,
+      "phone": "+1-555-0102",
+      "address": {
+        "street": "789 Pine Street",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Jane Smith",
+      "email": "jane@example.com",
+      "password": "jane123",
+      "role": "user",
+      "status": "active",
+      "joinDate": "2024-01-05T00:00:00Z",
+      "lastLogin": "2024-01-08T12:00:00Z",
+      "totalOrders": 2,
+      "totalSpent": 389.98,
+      "phone": "+1-555-0103",
+      "address": {
+        "street": "321 Elm Drive",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33101",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Michael Brown",
+      "email": "michael@example.com",
+      "password": "michael123",
+      "role": "user",
+      "status": "active",
+      "joinDate": "2024-01-08T00:00:00Z",
+      "lastLogin": "2024-01-16T14:30:00Z",
+      "totalOrders": 4,
+      "totalSpent": 756.43,
+      "phone": "+1-555-0104",
+      "address": {
+        "street": "654 Maple Lane",
+        "city": "Seattle",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Emily Davis",
+      "email": "emily@example.com",
+      "password": "emily123",
+      "role": "user",
+      "status": "inactive",
+      "joinDate": "2023-12-15T00:00:00Z",
+      "lastLogin": "2024-01-02T08:15:00Z",
+      "totalOrders": 1,
+      "totalSpent": 129.99,
+      "phone": "+1-555-0105",
+      "address": {
+        "street": "987 Cedar Court",
+        "city": "Austin",
+        "state": "TX",
+        "zipCode": "73301",
+        "country": "USA"
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Wireless Bluetooth Headphones",
+      "description": "Premium wireless headphones with active noise cancellation, 30-hour battery life, and superior sound quality. Perfect for music lovers and professionals who demand the best audio experience.",
+      "price": 199.99,
+      "category": "Electronics",
+      "subcategory": "Audio",
+      "brand": "SoundMax",
+      "stock": 45,
+      "image": "https://m.media-amazon.com/images/I/61RahTQtAqL.jpg",
+      "images": [
+        "https://cdn.4imprint.com/prod/700/547979.jpg",
+        "https://5.imimg.com/data5/SELLER/Default/2022/12/BB/TE/IC/2318215/hph2-3-500x500.jpg",
+        "https://i5.walmartimages.com/seo/wegear-Bluetooth-Over-Ear-Headphones-with-Mic-Gaming-Wireless-Corded-Dual-Mode-Headphones-60-Hours-Playtime-Deep-Bass-Black_1527075d-7f91-4b88-8c36-f93fa52eb455.c42e5c42cf08e07b4fc748660cfc22b6.jpeg?odnHeight=320&odnWidth=320&odnBg=FFFFFF"
+      ],
+      "rating": 4.5,
+      "reviews": 128,
+      "featured": true,
+      "specifications": {
+        "batteryLife": "30 hours",
+        "connectivity": "Bluetooth 5.0",
+        "weight": "250g",
+        "warranty": "2 years"
+      },
+      "tags": ["wireless", "bluetooth", "noise-cancelling", "premium"],
+      "createdAt": "2024-01-01T00:00:00Z",
+      "updatedAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "Smart Fitness Watch",
+      "description": "Advanced smartwatch with health monitoring, GPS tracking, heart rate sensor, and 7-day battery life. Track your fitness goals and stay connected on the go.",
+      "price": 299.99,
+      "category": "Electronics",
+      "subcategory": "Wearables",
+      "brand": "FitTech",
+      "stock": 32,
+      "image": "https://i5.walmartimages.com/seo/Smart-Watch-Fits-for-Android-and-iPhone-EEEkit-Fitness-Health-Tracker-Waterproof-Smartwatch-for-Women-Men_819cb65b-8437-4eb3-aba1-ce6513dc8d58.312f5775b50ab18c130fe5a454149fa9.jpeg",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Watch+Face",
+        "/placeholder.svg?height=400&width=400&text=Watch+Side",
+        "/placeholder.svg?height=400&width=400&text=Watch+Apps"
+      ],
+      "rating": 4.3,
+      "reviews": 89,
+      "featured": true,
+      "specifications": {
+        "displaySize": "1.4 inches",
+        "batteryLife": "7 days",
+        "waterResistance": "50m",
+        "sensors": "Heart rate, GPS, Accelerometer"
+      },
+      "tags": ["smartwatch", "fitness", "health", "gps"],
+      "createdAt": "2024-01-02T00:00:00Z",
+      "updatedAt": "2024-01-14T15:20:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Professional Running Shoes",
+      "description": "High-performance running shoes designed for serious athletes. Features advanced cushioning technology, breathable mesh upper, and durable rubber outsole for all terrains.",
+      "price": 129.99,
+      "category": "Sports",
+      "subcategory": "Footwear",
+      "brand": "RunPro",
+      "stock": 78,
+      "image": "https://cdn-img.poizonapp.com/pro-img/cut-img/20240620/a4c58cfdbf414d7c97cf9ae6a578d66b.jpg?x-oss-process=image/format,webp/resize,w_800,h_800",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Shoes+Side",
+        "/placeholder.svg?height=400&width=400&text=Shoes+Top",
+        "/placeholder.svg?height=400&width=400&text=Shoes+Sole"
+      ],
+      "rating": 4.7,
+      "reviews": 203,
+      "featured": true,
+      "specifications": {
+        "material": "Breathable mesh",
+        "sole": "Rubber with air cushioning",
+        "weight": "280g per shoe",
+        "sizes": "US 6-13"
+      },
+      "tags": ["running", "athletic", "comfortable", "durable"],
+      "createdAt": "2024-01-03T00:00:00Z",
+      "updatedAt": "2024-01-13T09:45:00Z"
+    },
+    {
+      "id": 4,
+      "name": "Premium Coffee Maker",
+      "description": "Professional-grade coffee maker with programmable settings, thermal carafe, and built-in grinder. Makes perfect coffee every time with precise temperature control.",
+      "price": 189.99,
+      "category": "Home",
+      "subcategory": "Kitchen",
+      "brand": "BrewMaster",
+      "stock": 23,
+      "image": "https://premiumlevella.com/wp-content/uploads/2021/01/PCM5422Bfilenamehimodelhi_PCM5422B-1.jpg",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Coffee+Maker+Front",
+        "/placeholder.svg?height=400&width=400&text=Coffee+Maker+Controls",
+        "/placeholder.svg?height=400&width=400&text=Coffee+Maker+Carafe"
+      ],
+      "rating": 4.4,
+      "reviews": 156,
+      "featured": true,
+      "specifications": {
+        "capacity": "12 cups",
+        "features": "Programmable, Built-in grinder",
+        "material": "Stainless steel",
+        "warranty": "3 years"
+      },
+      "tags": ["coffee", "kitchen", "programmable", "premium"],
+      "createdAt": "2024-01-04T00:00:00Z",
+      "updatedAt": "2024-01-12T14:20:00Z"
+    },
+    {
+      "id": 5,
+      "name": "Laptop Backpack Pro",
+      "description": "Durable laptop backpack with multiple compartments, water-resistant material, and ergonomic design. Perfect for professionals and students who need to carry their tech safely.",
+      "price": 79.99,
+      "category": "Accessories",
+      "subcategory": "Bags",
+      "brand": "TechCarry",
+      "stock": 67,
+      "image": "https://www.hypershop.com/cdn/shop/files/HP20P2BKGL-hero-01-v01-r01-2000x2000.webp?v=1747173804",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Backpack+Front",
+        "/placeholder.svg?height=400&width=400&text=Backpack+Open",
+        "/placeholder.svg?height=400&width=400&text=Backpack+Side"
+      ],
+      "rating": 4.2,
+      "reviews": 94,
+      "featured": false,
+      "specifications": {
+        "laptopSize": "Up to 17 inches",
+        "material": "Water-resistant nylon",
+        "compartments": "15+ pockets",
+        "weight": "1.2kg"
+      },
+      "tags": ["laptop", "backpack", "professional", "water-resistant"],
+      "createdAt": "2024-01-05T00:00:00Z",
+      "updatedAt": "2024-01-11T11:30:00Z"
+    },
+    {
+      "id": 6,
+      "name": "Portable Bluetooth Speaker",
+      "description": "High-quality portable speaker with 360-degree sound, 20-hour battery life, and waterproof design. Perfect for outdoor adventures and home entertainment.",
+      "price": 89.99,
+      "category": "Electronics",
+      "subcategory": "Audio",
+      "brand": "SoundWave",
+      "stock": 54,
+      "image": "https://cdn.thewirecutter.com/wp-content/media/2024/11/portablebluetoothspeakers-2048px-9481.jpg?auto=webp&quality=75&width=1024",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Speaker+Front",
+        "/placeholder.svg?height=400&width=400&text=Speaker+Top",
+        "/placeholder.svg?height=400&width=400&text=Speaker+Ports"
+      ],
+      "rating": 4.6,
+      "reviews": 187,
+      "featured": true,
+      "specifications": {
+        "batteryLife": "20 hours",
+        "connectivity": "Bluetooth 5.0, AUX",
+        "waterproof": "IPX7",
+        "power": "20W"
+      },
+      "tags": ["bluetooth", "portable", "waterproof", "outdoor"],
+      "createdAt": "2024-01-06T00:00:00Z",
+      "updatedAt": "2024-01-10T16:45:00Z"
+    },
+    {
+      "id": 7,
+      "name": "Premium Yoga Mat",
+      "description": "Eco-friendly yoga mat made from natural rubber with superior grip and cushioning. Perfect for all types of yoga practice and meditation.",
+      "price": 49.99,
+      "category": "Sports",
+      "subcategory": "Fitness",
+      "brand": "ZenFit",
+      "stock": 89,
+      "image": "https://www.yogikuti.com/wp-content/uploads/2018/08/PU-pink-mat-570x684.jpg",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Yoga+Mat+Flat",
+        "/placeholder.svg?height=400&width=400&text=Yoga+Mat+Rolled",
+        "/placeholder.svg?height=400&width=400&text=Yoga+Mat+Texture"
+      ],
+      "rating": 4.5,
+      "reviews": 112,
+      "featured": false,
+      "specifications": {
+        "material": "Natural rubber",
+        "thickness": "6mm",
+        "size": "183cm x 61cm",
+        "weight": "2.5kg"
+      },
+      "tags": ["yoga", "fitness", "eco-friendly", "non-slip"],
+      "createdAt": "2024-01-07T00:00:00Z",
+      "updatedAt": "2024-01-09T13:20:00Z"
+    },
+    {
+      "id": 8,
+      "name": "LED Desk Lamp",
+      "description": "Modern LED desk lamp with adjustable brightness, color temperature control, USB charging port, and sleek minimalist design.",
+      "price": 69.99,
+      "category": "Home",
+      "subcategory": "Lighting",
+      "brand": "LightTech",
+      "stock": 41,
+      "image": "https://m.media-amazon.com/images/I/513Mqx+kK+L.jpg",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Lamp+On",
+        "/placeholder.svg?height=400&width=400&text=Lamp+Adjustable",
+        "/placeholder.svg?height=400&width=400&text=Lamp+Base"
+      ],
+      "rating": 4.1,
+      "reviews": 78,
+      "featured": false,
+      "specifications": {
+        "lightType": "LED",
+        "brightness": "10 levels",
+        "colorTemp": "3000K-6500K",
+        "power": "12W"
+      },
+      "tags": ["led", "adjustable", "usb-charging", "modern"],
+      "createdAt": "2024-01-08T00:00:00Z",
+      "updatedAt": "2024-01-08T18:30:00Z"
+    },
+    {
+      "id": 9,
+      "name": "Wireless Gaming Mouse",
+      "description": "High-precision wireless gaming mouse with customizable RGB lighting, 16000 DPI sensor, and ergonomic design for extended gaming sessions.",
+      "price": 79.99,
+      "category": "Electronics",
+      "subcategory": "Gaming",
+      "brand": "GamePro",
+      "stock": 36,
+      "image": "/placeholder.svg?height=400&width=400&text=Gaming+Mouse",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Mouse+Top",
+        "/placeholder.svg?height=400&width=400&text=Mouse+Side",
+        "/placeholder.svg?height=400&width=400&text=Mouse+RGB"
+      ],
+      "rating": 4.4,
+      "reviews": 145,
+      "featured": false,
+      "specifications": {
+        "dpi": "16000 DPI",
+        "connectivity": "2.4GHz wireless",
+        "batteryLife": "70 hours",
+        "buttons": "7 programmable"
+      },
+      "tags": ["gaming", "wireless", "rgb", "high-precision"],
+      "createdAt": "2024-01-09T00:00:00Z",
+      "updatedAt": "2024-01-07T12:15:00Z"
+    },
+    {
+      "id": 10,
+      "name": "Stainless Steel Water Bottle",
+      "description": "Insulated stainless steel water bottle that keeps drinks cold for 24 hours or hot for 12 hours. BPA-free and perfect for active lifestyles.",
+      "price": 29.99,
+      "category": "Sports",
+      "subcategory": "Hydration",
+      "brand": "HydroMax",
+      "stock": 125,
+      "image": "/placeholder.svg?height=400&width=400&text=Water+Bottle",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Bottle+Full",
+        "/placeholder.svg?height=400&width=400&text=Bottle+Cap",
+        "/placeholder.svg?height=400&width=400&text=Bottle+Colors"
+      ],
+      "rating": 4.3,
+      "reviews": 89,
+      "featured": false,
+      "specifications": {
+        "capacity": "750ml",
+        "material": "Stainless steel",
+        "insulation": "Double-wall vacuum",
+        "features": "BPA-free, Leak-proof"
+      },
+      "tags": ["water-bottle", "insulated", "bpa-free", "sports"],
+      "createdAt": "2024-01-10T00:00:00Z",
+      "updatedAt": "2024-01-06T09:45:00Z"
+    },
+    {
+      "id": 11,
+      "name": "Wireless Phone Charger",
+      "description": "Fast wireless charging pad compatible with all Qi-enabled devices. Features LED indicator and overcharge protection for safe charging.",
+      "price": 39.99,
+      "category": "Electronics",
+      "subcategory": "Accessories",
+      "brand": "ChargeFast",
+      "stock": 73,
+      "image": "/placeholder.svg?height=400&width=400&text=Wireless+Charger",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Charger+Pad",
+        "/placeholder.svg?height=400&width=400&text=Charger+Phone",
+        "/placeholder.svg?height=400&width=400&text=Charger+LED"
+      ],
+      "rating": 4.2,
+      "reviews": 67,
+      "featured": false,
+      "specifications": {
+        "power": "15W fast charging",
+        "compatibility": "Qi-enabled devices",
+        "safety": "Overcharge protection",
+        "indicator": "LED status light"
+      },
+      "tags": ["wireless", "charging", "fast", "qi-compatible"],
+      "createdAt": "2024-01-11T00:00:00Z",
+      "updatedAt": "2024-01-05T14:20:00Z"
+    },
+    {
+      "id": 12,
+      "name": "Ergonomic Office Chair",
+      "description": "Professional ergonomic office chair with lumbar support, adjustable height, and breathable mesh back. Designed for all-day comfort and productivity.",
+      "price": 249.99,
+      "category": "Home",
+      "subcategory": "Furniture",
+      "brand": "ComfortWork",
+      "stock": 18,
+      "image": "/placeholder.svg?height=400&width=400&text=Office+Chair",
+      "images": [
+        "/placeholder.svg?height=400&width=400&text=Chair+Front",
+        "/placeholder.svg?height=400&width=400&text=Chair+Side",
+        "/placeholder.svg?height=400&width=400&text=Chair+Back"
+      ],
+      "rating": 4.6,
+      "reviews": 234,
+      "featured": true,
+      "specifications": {
+        "material": "Mesh and fabric",
+        "weightCapacity": "150kg",
+        "adjustments": "Height, armrests, tilt",
+        "warranty": "5 years"
+      },
+      "tags": ["ergonomic", "office", "comfortable", "adjustable"],
+      "createdAt": "2024-01-12T00:00:00Z",
+      "updatedAt": "2024-01-04T11:30:00Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1001,
+      "userId": 2,
+      "customerName": "Sarah Johnson",
+      "customerEmail": "user@example.com",
+      "items": [
+        {
+          "id": 1,
+          "name": "Wireless Bluetooth Headphones",
+          "price": 199.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Wireless+Headphones"
+        },
+        {
+          "id": 6,
+          "name": "Portable Bluetooth Speaker",
+          "price": 89.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Bluetooth+Speaker"
+        }
+      ],
+      "subtotal": 289.98,
+      "shipping": 10.0,
+      "tax": 23.2,
+      "total": 323.18,
+      "status": "delivered",
+      "createdAt": "2024-01-10T14:30:00Z",
+      "updatedAt": "2024-01-15T09:20:00Z",
+      "shippingAddress": {
+        "street": "456 Oak Avenue",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipCode": "90210",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "trackingNumber": "TRK123456789",
+      "notes": "Leave at front door"
+    },
+    {
+      "id": 1002,
+      "userId": 3,
+      "customerName": "John Doe",
+      "customerEmail": "john@example.com",
+      "items": [
+        {
+          "id": 2,
+          "name": "Smart Fitness Watch",
+          "price": 299.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Smart+Watch"
+        },
+        {
+          "id": 3,
+          "name": "Professional Running Shoes",
+          "price": 129.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Running+Shoes"
+        }
+      ],
+      "subtotal": 429.98,
+      "shipping": 10.0,
+      "tax": 34.4,
+      "total": 474.38,
+      "status": "shipped",
+      "createdAt": "2024-01-12T10:15:00Z",
+      "updatedAt": "2024-01-16T14:30:00Z",
+      "shippingAddress": {
+        "street": "789 Pine Street",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "trackingNumber": "TRK987654321",
+      "notes": ""
+    },
+    {
+      "id": 1003,
+      "userId": 4,
+      "customerName": "Jane Smith",
+      "customerEmail": "jane@example.com",
+      "items": [
+        {
+          "id": 4,
+          "name": "Premium Coffee Maker",
+          "price": 189.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Coffee+Maker"
+        },
+        {
+          "id": 8,
+          "name": "LED Desk Lamp",
+          "price": 69.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Desk+Lamp"
+        }
+      ],
+      "subtotal": 259.98,
+      "shipping": 10.0,
+      "tax": 20.8,
+      "total": 290.78,
+      "status": "processing",
+      "createdAt": "2024-01-14T16:45:00Z",
+      "updatedAt": "2024-01-15T08:30:00Z",
+      "shippingAddress": {
+        "street": "321 Elm Drive",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33101",
+        "country": "USA"
+      },
+      "paymentMethod": "PayPal",
+      "trackingNumber": "",
+      "notes": "Call before delivery"
+    },
+    {
+      "id": 1004,
+      "userId": 5,
+      "customerName": "Michael Brown",
+      "customerEmail": "michael@example.com",
+      "items": [
+        {
+          "id": 12,
+          "name": "Ergonomic Office Chair",
+          "price": 249.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Office+Chair"
+        }
+      ],
+      "subtotal": 249.99,
+      "shipping": 15.0,
+      "tax": 20.0,
+      "total": 284.99,
+      "status": "pending",
+      "createdAt": "2024-01-16T11:20:00Z",
+      "updatedAt": "2024-01-16T11:20:00Z",
+      "shippingAddress": {
+        "street": "654 Maple Lane",
+        "city": "Seattle",
+        "state": "WA",
+        "zipCode": "98101",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "trackingNumber": "",
+      "notes": "Fragile - handle with care"
+    },
+    {
+      "id": 1005,
+      "userId": 2,
+      "customerName": "Sarah Johnson",
+      "customerEmail": "user@example.com",
+      "items": [
+        {
+          "id": 7,
+          "name": "Premium Yoga Mat",
+          "price": 49.99,
+          "quantity": 2,
+          "image": "/placeholder.svg?height=400&width=400&text=Yoga+Mat"
+        },
+        {
+          "id": 10,
+          "name": "Stainless Steel Water Bottle",
+          "price": 29.99,
+          "quantity": 3,
+          "image": "/placeholder.svg?height=400&width=400&text=Water+Bottle"
+        }
+      ],
+      "subtotal": 189.95,
+      "shipping": 10.0,
+      "tax": 15.2,
+      "total": 215.15,
+      "status": "delivered",
+      "createdAt": "2024-01-08T13:30:00Z",
+      "updatedAt": "2024-01-12T16:45:00Z",
+      "shippingAddress": {
+        "street": "456 Oak Avenue",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipCode": "90210",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "trackingNumber": "TRK555666777",
+      "notes": ""
+    },
+    {
+      "id": 1006,
+      "userId": 6,
+      "customerName": "Emily Davis",
+      "customerEmail": "emily@example.com",
+      "items": [
+        {
+          "id": 3,
+          "name": "Professional Running Shoes",
+          "price": 129.99,
+          "quantity": 1,
+          "image": "/placeholder.svg?height=400&width=400&text=Running+Shoes"
+        }
+      ],
+      "subtotal": 129.99,
+      "shipping": 10.0,
+      "tax": 10.4,
+      "total": 150.39,
+      "status": "cancelled",
+      "createdAt": "2024-01-02T09:15:00Z",
+      "updatedAt": "2024-01-03T14:20:00Z",
+      "shippingAddress": {
+        "street": "987 Cedar Court",
+        "city": "Austin",
+        "state": "TX",
+        "zipCode": "73301",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "trackingNumber": "",
+      "notes": "Customer requested cancellation"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "description": "Latest electronic gadgets, devices, and accessories",
+      "image": "/placeholder.svg?height=300&width=400&text=Electronics",
+      "subcategories": ["Audio", "Wearables", "Gaming", "Accessories"],
+      "productCount": 5,
+      "featured": true
+    },
+    {
+      "id": 2,
+      "name": "Sports",
+      "description": "Sports equipment, fitness gear, and outdoor accessories",
+      "image": "/placeholder.svg?height=300&width=400&text=Sports",
+      "subcategories": ["Footwear", "Fitness", "Hydration", "Outdoor"],
+      "productCount": 3,
+      "featured": true
+    },
+    {
+      "id": 3,
+      "name": "Home",
+      "description": "Home appliances, furniture, and decor items",
+      "image": "/placeholder.svg?height=300&width=400&text=Home",
+      "subcategories": ["Kitchen", "Lighting", "Furniture", "Decor"],
+      "productCount": 3,
+      "featured": true
+    },
+    {
+      "id": 4,
+      "name": "Accessories",
+      "description": "Fashion accessories, bags, and lifestyle products",
+      "image": "/placeholder.svg?height=300&width=400&text=Accessories",
+      "subcategories": ["Bags", "Tech Accessories", "Fashion", "Lifestyle"],
+      "productCount": 1,
+      "featured": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "productId": 1,
+      "userId": 2,
+      "userName": "Sarah Johnson",
+      "rating": 5,
+      "title": "Excellent sound quality!",
+      "comment": "These headphones exceeded my expectations. The noise cancellation is fantastic and the battery life is amazing. Highly recommended!",
+      "createdAt": "2024-01-12T14:30:00Z",
+      "verified": true,
+      "helpful": 15
+    },
+    {
+      "id": 2,
+      "productId": 1,
+      "userId": 3,
+      "userName": "John Doe",
+      "rating": 4,
+      "title": "Great headphones, minor issues",
+      "comment": "Overall very satisfied with the purchase. Sound quality is excellent, but the headband could be more comfortable for long sessions.",
+      "createdAt": "2024-01-14T09:15:00Z",
+      "verified": true,
+      "helpful": 8
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "userId": 5,
+      "userName": "Michael Brown",
+      "rating": 5,
+      "title": "Perfect fitness companion",
+      "comment": "This smartwatch has everything I need for tracking my workouts. The heart rate monitor is very accurate and the GPS works great.",
+      "createdAt": "2024-01-13T16:45:00Z",
+      "verified": true,
+      "helpful": 12
+    },
+    {
+      "id": 4,
+      "productId": 3,
+      "userId": 4,
+      "userName": "Jane Smith",
+      "rating": 5,
+      "title": "Best running shoes ever!",
+      "comment": "I've been running in these for 3 months now and they're still as comfortable as day one. Great cushioning and support.",
+      "createdAt": "2024-01-11T11:20:00Z",
+      "verified": true,
+      "helpful": 20
+    },
+    {
+      "id": 5,
+      "productId": 4,
+      "userId": 6,
+      "userName": "Emily Davis",
+      "rating": 4,
+      "title": "Good coffee maker",
+      "comment": "Makes excellent coffee and the programmable features are convenient. The built-in grinder is a nice touch.",
+      "createdAt": "2024-01-10T08:30:00Z",
+      "verified": false,
+      "helpful": 6
+    }
+  ],
+  "cart": [],
+  "wishlist": [
+    {
+      "id": 1,
+      "userId": 2,
+      "productId": 9,
+      "addedAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "productId": 11,
+      "addedAt": "2024-01-14T14:20:00Z"
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "productId": 12,
+      "addedAt": "2024-01-13T16:45:00Z"
+    }
+  ],
+  "coupons": [
+    {
+      "id": 1,
+      "code": "WELCOME10",
+      "description": "10% off for new customers",
+      "discountType": "percentage",
+      "discountValue": 10,
+      "minimumOrder": 50,
+      "maxDiscount": 50,
+      "validFrom": "2024-01-01T00:00:00Z",
+      "validUntil": "2024-12-31T23:59:59Z",
+      "usageLimit": 1000,
+      "usedCount": 45,
+      "active": true
+    },
+    {
+      "id": 2,
+      "code": "SAVE20",
+      "description": "$20 off orders over $100",
+      "discountType": "fixed",
+      "discountValue": 20,
+      "minimumOrder": 100,
+      "maxDiscount": 20,
+      "validFrom": "2024-01-01T00:00:00Z",
+      "validUntil": "2024-06-30T23:59:59Z",
+      "usageLimit": 500,
+      "usedCount": 123,
+      "active": true
+    },
+    {
+      "id": 3,
+      "code": "FREESHIP",
+      "description": "Free shipping on all orders",
+      "discountType": "shipping",
+      "discountValue": 0,
+      "minimumOrder": 0,
+      "maxDiscount": 15,
+      "validFrom": "2024-01-15T00:00:00Z",
+      "validUntil": "2024-02-15T23:59:59Z",
+      "usageLimit": 200,
+      "usedCount": 67,
+      "active": true
+    }
+  ],
+  "settings": {
+    "storeName": "TechMart E-Commerce",
+    "storeDescription": "Your one-stop shop for electronics, sports gear, home appliances, and accessories",
+    "currency": "USD",
+    "taxRate": 0.08,
+    "shippingCost": 10.0,
+    "freeShippingThreshold": 100.0,
+    "contactEmail": "support@techmart.com",
+    "contactPhone": "+1-800-TECHMART",
+    "address": {
+      "street": "123 Commerce Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94102",
+      "country": "USA"
+    },
+    "socialMedia": {
+      "facebook": "https://facebook.com/techmart",
+      "twitter": "https://twitter.com/techmart",
+      "instagram": "https://instagram.com/techmart"
+    },
+    "businessHours": {
+      "monday": "9:00 AM - 6:00 PM",
+      "tuesday": "9:00 AM - 6:00 PM",
+      "wednesday": "9:00 AM - 6:00 PM",
+      "thursday": "9:00 AM - 6:00 PM",
+      "friday": "9:00 AM - 6:00 PM",
+      "saturday": "10:00 AM - 4:00 PM",
+      "sunday": "Closed"
+    },
+    "policies": {
+      "returnPolicy": "30-day return policy",
+      "shippingPolicy": "Free shipping on orders over $100",
+      "privacyPolicy": "We protect your privacy",
+      "termsOfService": "Terms and conditions apply"
+    }
+  },
+  "analytics": {
+    "totalUsers": 6,
+    "totalOrders": 6,
+    "totalRevenue": 1738.87,
+    "averageOrderValue": 289.81,
+    "topSellingProducts": [
+      { "productId": 1, "name": "Wireless Bluetooth Headphones", "unitsSold": 1 },
+      { "productId": 3, "name": "Professional Running Shoes", "unitsSold": 2 },
+      { "productId": 7, "name": "Premium Yoga Mat", "unitsSold": 2 }
+    ],
+    "salesByCategory": [
+      { "category": "Electronics", "revenue": 729.95 },
+      { "category": "Sports", "revenue": 439.93 },
+      { "category": "Home", "revenue": 569.99 }
+    ],
+    "monthlyRevenue": [{ "month": "2024-01", "revenue": 1738.87 }]
+  }
+}
